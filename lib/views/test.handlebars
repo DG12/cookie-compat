@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!-- Clean up cookies after previous runs -->
+<iframe src="http://example.org:8888/delete-cookies"></iframe>
+<iframe src="http://home.example.org:8888/delete-cookies"></iframe>
+<iframe src="http://home.example.org.:8888/delete-cookies"></iframe>
+<iframe src="http://sibling.example.org:8888/delete-cookies"></iframe>
+<iframe src="http://subdomain.home.example.org:8888/delete-cookies"></iframe>
+<iframe src="http://sibling.home.example.org:8888/delete-cookies"></iframe>
+
+<script>
+    var delCookiesIFrames = document.querySelectorAll('iframe');
+    var pendingIFramesCount = delCookiesIFrames.length;
+
+    function runTest () {
+        var cookies = JSON.parse('{{{cookies}}}');
+
+        cookies.forEach(function (c) {
+            document.cookie = c;
+        });
+
+        window.location = '{{{resultUrl}}}';
+    }
+
+    Array.prototype.slice.call(delCookiesIFrames).forEach(function (iframe) {
+        iframe.addEventListener('load', function () {
+            if (--pendingIFramesCount === 0)
+                runTest();
+        });
+    });
+</script>
+</body>
+</html>

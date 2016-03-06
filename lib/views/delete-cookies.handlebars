@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        document.cookie.split(';').forEach(function (c) {
+            var key = c.split("=")[0].trim();
+
+            document.cookie = key + '=deleted; Expires=Fri, 07 Aug 2007 08:04:19 GMT';
+            document.cookie = key + '; Expires=Fri, 07 Aug 2007 08:04:19 GMT';
+            document.cookie = key + '; Path=/cookie-parser-result; Expires=Fri, 07 Aug 2007 08:04:19 GMT';
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

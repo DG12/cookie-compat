@@ -19,6 +19,7 @@
   "dependencies": {
     "express": "^4.13.4",
     "express-handlebars": "^3.0.0",
+    "node-uuid": "^1.4.7",
     "useragent": "^2.1.8"
   }
 }

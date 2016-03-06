@@ -1,0 +1,24 @@
+{
+  "name": "cookie-compat",
+  "version": "1.0.0",
+  "description": "Browsers RFC 6265 compatibility research.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inikulin/cookie-compat.git"
+  },
+  "author": "Ivan Nikulin (ifaaan@gmail.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/inikulin/cookie-compat/issues"
+  },
+  "homepage": "https://github.com/inikulin/cookie-compat#readme",
+  "dependencies": {
+    "express": "^4.13.4",
+    "express-handlebars": "^3.0.0",
+    "useragent": "^2.1.8"
+  }
+}

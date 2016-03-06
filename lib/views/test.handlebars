@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title></title>
@@ -13,12 +13,16 @@
 <iframe src="http://subdomain.home.example.org:8888/delete-cookies"></iframe>
 <iframe src="http://sibling.home.example.org:8888/delete-cookies"></iframe>
 
+<script id="cookies" type="application/json">
+    {{{cookies}}}
+</script>
+
 <script>
     var delCookiesIFrames = document.querySelectorAll('iframe');
     var pendingIFramesCount = delCookiesIFrames.length;
 
     function runTest () {
-        var cookies = JSON.parse('{{{cookies}}}');
+        var cookies = JSON.parse(document.querySelector('#cookies').textContent);
 
         cookies.forEach(function (c) {
             document.cookie = c;

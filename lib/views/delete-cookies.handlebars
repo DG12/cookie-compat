@@ -4,22 +4,54 @@
     <meta charset="UTF-8">
     <title></title>
     <script>
-        document.cookie.split(';').forEach(function (c) {
-            var key = c.split("=")[0].trim();
+        var paths = [
+            null,
+            '/cookie-parser-result/foo/bar',
+            '/cookie-parser-result/foo',
+            '/cookie-parser-result/foo/qux',
+            '/cookie-parser-result/foo/qux/',
+            '/cookie-parser-result/foo/',
+            '/cookie-parser-result/foo/qux?',
+            '/cookie-parser-result/foo/qux#',
+            '/cookie-parser-result/foo/qux;',
+            '/cookie-parser-result/f%6Fo/bar',
+            '/cookie-parser-result/',
+            '/cookie-parser-result'
+        ];
 
-            var strs = [
-                key + '=deleted; Expires=Fri, 07 Aug 2007 08:04:19 GMT',
-                key + '; Expires=Fri, 07 Aug 2007 08:04:19 GMT',
-                key + '=deleted; Path=/cookie-parser-result; Expires=Fri, 07 Aug 2007 08:04:19 GMT',
-                key + '=deleted; Path=/qux; Expires=Fri, 07 Aug 2007 08:04:19 GMT',
-                key + '=deleted; Path=/; Expires=Fri, 07 Aug 2007 08:04:19 GMT'
+        var domains = [
+            null,
+            document.domain,
+            '.' + document.domain,
+            document.domain + '8888'
+        ];
+
+        document.cookie.split(';').forEach(function (c) {
+            c = c.trim();
+
+            var name = c.split('=')[0].trim();
+
+            var keys = [
+                c,
+                name,
+                name + '=deleted',
+                name + '='
             ];
 
-            strs.forEach(function (str) {
-                document.cookie = str;
-                document.cookie = str + '; Domain=' + document.domain;
-                document.cookie = str + '; Domain=.' + document.domain;
-                document.cookie = str + '; Domain=' + document.domain + ':8888';
+            keys.forEach(function (key) {
+                domains.forEach(function (domain) {
+                    paths.forEach(function (path) {
+                        var expire = key + '; Expires=Fri, 07 Aug 2007 08:04:19 GMT';
+
+                        if (domain)
+                            expire += '; Domain=' + domain;
+
+                        if (path)
+                            expire += '; Path=' + path;
+
+                        document.cookie = expire;
+                    });
+                });
             });
         });
     </script>

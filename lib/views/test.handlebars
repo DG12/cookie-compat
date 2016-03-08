@@ -5,49 +5,49 @@
     <title></title>
 </head>
 <body>
-<!-- Clean up cookies after previous runs -->
-<iframe src="http://example.org:8888/cookie-parser-result?delete=true"></iframe>
-<iframe src="http://home.example.org:8888/cookie-parser-result?delete=true"></iframe>
-<iframe src="http://home.example.org.:8888/cookie-parser-result?delete=true"></iframe>
-<iframe src="http://sibling.example.org:8888/cookie-parser-result?delete=true"></iframe>
-<iframe src="http://subdomain.home.example.org:8888/cookie-parser-result?delete=true"></iframe>
-<iframe src="http://sibling.home.example.org:8888/cookie-parser-result?delete=true"></iframe>
-
-<iframe src="http://example.org:8888/cookie-parser-result/foo?delete=true"></iframe>
-<iframe src="http://home.example.org:8888/cookie-parser-result/foo?delete=true"></iframe>
-<iframe src="http://home.example.org.:8888/cookie-parser-result/foo?delete=true"></iframe>
-<iframe src="http://sibling.example.org:8888/cookie-parser-result/foo?delete=true"></iframe>
-<iframe src="http://subdomain.home.example.org:8888/cookie-parser-result/foo?delete=true"></iframe>
-<iframe src="http://sibling.home.example.org:8888/cookie-parser-result/foo?delete=true"></iframe>
-
-<iframe src="http://example.org:8888/cookie-parser-result/foo/bar?delete=true"></iframe>
-<iframe src="http://home.example.org:8888/cookie-parser-result/foo/bar?delete=true"></iframe>
-<iframe src="http://home.example.org.:8888/cookie-parser-result/foo/bar?delete=true"></iframe>
-<iframe src="http://sibling.example.org:8888/cookie-parser-result/foo/bar?delete=true"></iframe>
-<iframe src="http://subdomain.home.example.org:8888/cookie-parser-result/foo/bar?delete=true"></iframe>
-<iframe src="http://sibling.home.example.org:8888/cookie-parser-result/foo/bar?delete=true"></iframe>
-
-<iframe src="http://example.org:8888/cookie-parser-result/foo/qux?delete=true"></iframe>
-<iframe src="http://home.example.org:8888/cookie-parser-result/foo/qux?delete=true"></iframe>
-<iframe src="http://home.example.org.:8888/cookie-parser-result/foo/qux?delete=true"></iframe>
-<iframe src="http://sibling.example.org:8888/cookie-parser-result/foo/qux?delete=true"></iframe>
-<iframe src="http://subdomain.home.example.org:8888/cookie-parser-result/foo/qux?delete=true"></iframe>
-<iframe src="http://sibling.home.example.org:8888/cookie-parser-result/foo/qux?delete=true"></iframe>
-
-<iframe src="http://example.org:8888/cookie-parser-result/foo/qux/?delete=true"></iframe>
-<iframe src="http://home.example.org:8888/cookie-parser-result/foo/qux/?delete=true"></iframe>
-<iframe src="http://home.example.org.:8888/cookie-parser-result/foo/qux/?delete=true"></iframe>
-<iframe src="http://sibling.example.org:8888/cookie-parser-result/foo/qux/?delete=true"></iframe>
-<iframe src="http://subdomain.home.example.org:8888/cookie-parser-result/foo/qux/?delete=true"></iframe>
-<iframe src="http://sibling.home.example.org:8888/cookie-parser-result/foo/qux/?delete=true"></iframe>
 
 <script id="cookies" type="application/json">
     {{{cookies}}}
 </script>
 
 <script>
-    var delCookiesIFrames = document.querySelectorAll('iframe');
-    var pendingIFramesCount = delCookiesIFrames.length;
+
+    var paths = [
+        '/cookie-parser-result/foo/bar',
+        '/cookie-parser-result/foo',
+        '/cookie-parser-result/foo/qux',
+        '/cookie-parser-result/foo/qux/',
+        '/cookie-parser-result/foo/',
+        '/cookie-parser-result/foo/qux;',
+        '/cookie-parser-result/',
+        '/cookie-parser-result'
+    ];
+
+    var domains = [
+        'http://example.org:8888',
+        'http://home.example.org:8888',
+        'http://home.example.org.:8888',
+        'http://sibling.example.org:8888',
+        'http://subdomain.home.example.org:8888',
+        'http://sibling.home.example.org:8888'
+    ];
+
+    var pendingIFramesCount = paths.length * domains.length;
+
+    paths.forEach(function (path) {
+        domains.forEach(function (domain) {
+            var iframe = document.createElement('iframe');
+
+            iframe.onload = function () {
+                if (--pendingIFramesCount === 0)
+                    runTest();
+            };
+
+            iframe.src = domain + path + '?delete=true';
+
+            document.body.appendChild(iframe);
+        });
+    });
 
     function runTest () {
         // NOTE: assert cookies are clean
@@ -62,13 +62,6 @@
 
         window.location = '{{{resultUrl}}}';
     }
-
-    Array.prototype.slice.call(delCookiesIFrames).forEach(function (iframe) {
-        iframe.onload = function () {
-            if (--pendingIFramesCount === 0)
-                runTest();
-        };
-    });
 </script>
 </body>
 </html>

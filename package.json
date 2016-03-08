@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Browsers RFC 6265 compatibility research.",
   "main": "index.js",
+  "bin": "bin/test-runner",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

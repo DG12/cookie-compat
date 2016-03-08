@@ -1,6 +1,6 @@
 {
   "Chrome": {
-    "version": "48.0.2564",
+    "version": "49.0.2623",
     "failingTests": {
       "0004": {
         "cookies": [

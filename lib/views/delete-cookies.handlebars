@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title></title>
     <script>
-        var paths = [
+        var PATHS = [
             null,
             '/cookie-parser-result/foo/bar',
             '/cookie-parser-result/foo',
@@ -19,7 +19,7 @@
             '/cookie-parser-result'
         ];
 
-        var domains = [
+        var DOMAINS = [
             null,
             document.domain,
             '.' + document.domain,
@@ -39,8 +39,8 @@
             ];
 
             keys.forEach(function (key) {
-                domains.forEach(function (domain) {
-                    paths.forEach(function (path) {
+                DOMAINS.forEach(function (domain) {
+                    PATHS.forEach(function (path) {
                         var expire = key + '; Expires=Fri, 07 Aug 2007 08:04:19 GMT';
 
                         if (domain)

@@ -211,5 +211,189 @@
         "actual": "foo=bar"
       }
     }
+  },
+  "Firefox": {
+    "version": "44.0.0",
+    "failingTests": {
+      "0004": {
+        "cookies": [
+          "foo"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "foo"
+      },
+      "0021": {
+        "cookies": [
+          "a=b",
+          "=x",
+          "c=d"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "a=b; c=d",
+        "actual": "a=b; x; c=d"
+      },
+      "0027": {
+        "cookies": [
+          "foo",
+          "bar"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "bar"
+      },
+      "CHROMIUM0009": {
+        "cookies": [
+          "BLAHHH; path=/;"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "BLAHHH"
+      },
+      "CHROMIUM0010": {
+        "cookies": [
+          "\"BLA\\\"HHH\"; path=/;"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "\"BLA\\\"HHH\""
+      },
+      "CHROMIUM0012": {
+        "cookies": [
+          "=ABC"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "ABC"
+      },
+      "DISABLED_PATH0029": {
+        "cookies": [
+          "foo=bar; path=/cookie-parser-result/foo/bar"
+        ],
+        "urlTested": "/cookie-parser-result/f%6Fo/bar?disabled-path0029",
+        "expected": "foo=bar",
+        "actual": ""
+      },
+      "MOZILLA0012": {
+        "cookies": [
+          "test=\"fubar! = foo;bar\\\";\" parser; max-age=6",
+          "five; max-age=2.63,"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "test=\"fubar! = foo",
+        "actual": "test=\"fubar! = foo; five"
+      },
+      "MOZILLA0014": {
+        "cookies": [
+          "six"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "six"
+      },
+      "MOZILLA0015": {
+        "cookies": [
+          "six",
+          "seven"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "seven"
+      },
+      "MOZILLA0016": {
+        "cookies": [
+          "six",
+          "seven",
+          " =eight"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "eight"
+      },
+      "MOZILLA0017": {
+        "cookies": [
+          "six",
+          "seven",
+          " =eight",
+          "test=six"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "test=six",
+        "actual": "eight; test=six"
+      },
+      "NAME0017": {
+        "cookies": [
+          "=a=bar"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "a=bar"
+      },
+      "NAME0023": {
+        "cookies": [
+          "foo;bar=baz"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "foo"
+      },
+      "NAME0025": {
+        "cookies": [
+          "===a=bar"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "==a=bar"
+      },
+      "NAME0028": {
+        "cookies": [
+          "=a"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "a"
+      },
+      "NAME0031": {
+        "cookies": [
+          "\"foo;bar\"=baz"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "\"foo"
+      },
+      "NAME0032": {
+        "cookies": [
+          "\"foo\\\"bar;baz\"=qux"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "\"foo\\\"bar"
+      },
+      "NAME0033": {
+        "cookies": [
+          "=foo=bar",
+          "aaa"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "aaa"
+      },
+      "OPTIONAL_DOMAIN0042": {
+        "cookies": [
+          "foo=bar; domain=foo.example.org; domain="
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result?optional-domain0042",
+        "expected": "",
+        "actual": "foo=bar"
+      },
+      "PATH0014": {
+        "cookies": [
+          "foo=bar; path=/cookie-parser-result/foo/qux/"
+        ],
+        "urlTested": "/cookie-parser-result/foo/qux?path0014",
+        "expected": "",
+        "actual": "foo=bar"
+      }
+    }
   }
 }

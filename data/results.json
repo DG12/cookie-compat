@@ -395,5 +395,411 @@
         "actual": "foo=bar"
       }
     }
+  },
+  "Safari": {
+    "version": "8.0.0",
+    "failingTests": {
+      "0004": {
+        "cookies": [
+          "foo"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "foo="
+      },
+      "0016": {
+        "cookies": [
+          "z=y",
+          "a=b"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "z=y; a=b",
+        "actual": "a=b; z=y"
+      },
+      "0017": {
+        "cookies": [
+          "z=y, a=b"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "z=y, a=b",
+        "actual": "a=b; z=y"
+      },
+      "0018": {
+        "cookies": [
+          "z=y; foo=bar, a=b"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "z=y",
+        "actual": "a=b; z=y"
+      },
+      "0019": {
+        "cookies": [
+          "foo=b;max-age=3600, c=d;path=/"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "foo=b",
+        "actual": "c=d; foo=b"
+      },
+      "0022": {
+        "cookies": [
+          "a=b",
+          "x=",
+          "c=d"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "a=b; x=; c=d",
+        "actual": "a=b; c=d; x="
+      },
+      "0023": {
+        "cookies": [
+          "foo",
+          ""
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "foo="
+      },
+      "0024": {
+        "cookies": [
+          "foo",
+          "="
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "foo="
+      },
+      "0025": {
+        "cookies": [
+          "foo",
+          "; bar"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "foo="
+      },
+      "0026": {
+        "cookies": [
+          "foo",
+          "   "
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "foo="
+      },
+      "0027": {
+        "cookies": [
+          "foo",
+          "bar"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "bar=; foo="
+      },
+      "0028": {
+        "cookies": [
+          "foo",
+          "\t"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "foo="
+      },
+      "ATTRIBUTE0021": {
+        "cookies": [
+          "foo=bar; Path=/qux; Path=/"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "foo=bar",
+        "actual": ""
+      },
+      "ATTRIBUTE0022": {
+        "cookies": [
+          "foo=bar; Path=/; Path=/qux"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "foo=bar"
+      },
+      "ATTRIBUTE0023": {
+        "cookies": [
+          "foo=bar; Path=/qux; Path=/cookie-parser-result"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "foo=bar",
+        "actual": ""
+      },
+      "ATTRIBUTE0024": {
+        "cookies": [
+          "foo=bar; Path=/cookie-parser-result; Path=/qux"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "foo=bar"
+      },
+      "CHARSET0001": {
+        "cookies": [
+          "foo=春节回家路·春运完全手册"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "foo=春节回家路·春运完全手册",
+        "actual": "foo="
+      },
+      "CHARSET0002": {
+        "cookies": [
+          "春节回=家路·春运完全手册"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "春节回=家路·春运完全手册",
+        "actual": ""
+      },
+      "CHARSET0003": {
+        "cookies": [
+          "春节回=家路·春运; 完全手册"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "春节回=家路·春运",
+        "actual": ""
+      },
+      "CHARSET0004": {
+        "cookies": [
+          "foo=\"春节回家路·春运完全手册\""
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "foo=\"春节回家路·春运完全手册\"",
+        "actual": "foo=\""
+      },
+      "CHROMIUM0004": {
+        "cookies": [
+          "aBc=\"zz;pp\" ; ;"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "aBc=\"zz",
+        "actual": "aBc=\"zz;pp\""
+      },
+      "CHROMIUM0015": {
+        "cookies": [
+          "  A=== BC  ;foo;;;   bar"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "A=== BC",
+        "actual": "A===BC"
+      },
+      "COMMA0001": {
+        "cookies": [
+          "foo=bar, baz=qux"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "foo=bar, baz=qux",
+        "actual": "baz=qux; foo=bar"
+      },
+      "COMMA0007": {
+        "cookies": [
+          "foo=bar; Expires=Fri 07 Aug 2019 08:04:19 GMT, baz=qux"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "foo=bar",
+        "actual": "baz=qux; foo=bar"
+      },
+      "DISABLED_PATH0029": {
+        "cookies": [
+          "foo=bar; path=/cookie-parser-result/foo/bar"
+        ],
+        "urlTested": "/cookie-parser-result/f%6Fo/bar?disabled-path0029",
+        "expected": "foo=bar",
+        "actual": ""
+      },
+      "DOMAIN0014": {
+        "cookies": [
+          "foo=bar; domain=home.example.org."
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result?domain0014",
+        "expected": "",
+        "actual": "foo=bar"
+      },
+      "DOMAIN0020": {
+        "cookies": [
+          "foo2=bar2; domain=.home.example.org",
+          "foo=bar; domain=home.example.org"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result?domain0020",
+        "expected": "foo2=bar2; foo=bar",
+        "actual": "foo=bar; foo2=bar2"
+      },
+      "DOMAIN0023": {
+        "cookies": [
+          "foo2=bar2; domain=.example.org",
+          "foo=bar; domain=home.example.org"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result?domain0023",
+        "expected": "foo2=bar2; foo=bar",
+        "actual": "foo=bar; foo2=bar2"
+      },
+      "DOMAIN0024": {
+        "cookies": [
+          "foo=bar; domain=.example.org; domain=home.example.org"
+        ],
+        "urlTested": "http://sibling.example.org:8888/cookie-parser-result?domain0024",
+        "expected": "",
+        "actual": "foo=bar"
+      },
+      "DOMAIN0025": {
+        "cookies": [
+          "foo=bar; domain=home.example.org; domain=.example.org"
+        ],
+        "urlTested": "http://sibling.example.org:8888/cookie-parser-result?domain0025",
+        "expected": "foo=bar",
+        "actual": ""
+      },
+      "DOMAIN0031": {
+        "cookies": [
+          "foo=bar; domain=home.example.org; domain=.example.org"
+        ],
+        "urlTested": "http://sibling.example.org:8888/cookie-parser-result?domain0031",
+        "expected": "foo=bar",
+        "actual": ""
+      },
+      "DOMAIN0034": {
+        "cookies": [
+          "foo=bar; domain=home.example.org; domain=home.example.com"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result?domain0034",
+        "expected": "",
+        "actual": "foo=bar"
+      },
+      "DOMAIN0035": {
+        "cookies": [
+          "foo=bar; domain=home.example.com; domain=home.example.org"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result?domain0035",
+        "expected": "foo=bar",
+        "actual": ""
+      },
+      "MOZILLA0012": {
+        "cookies": [
+          "test=\"fubar! = foo;bar\\\";\" parser; max-age=6",
+          "five; max-age=2.63,"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "test=\"fubar! = foo",
+        "actual": "test=\"fubar! = foo;bar\\\""
+      },
+      "MOZILLA0014": {
+        "cookies": [
+          "six"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "six="
+      },
+      "MOZILLA0015": {
+        "cookies": [
+          "six",
+          "seven"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "seven=; six="
+      },
+      "MOZILLA0016": {
+        "cookies": [
+          "six",
+          "seven",
+          " =eight"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "seven=; six="
+      },
+      "MOZILLA0017": {
+        "cookies": [
+          "six",
+          "seven",
+          " =eight",
+          "test=six"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "test=six",
+        "actual": "seven=; six=; test=six"
+      },
+      "NAME0020": {
+        "cookies": [
+          "\"a=b\"=bar"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "\"a=b\"=bar",
+        "actual": ""
+      },
+      "NAME0033": {
+        "cookies": [
+          "=foo=bar",
+          "aaa"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "aaa="
+      },
+      "ORDERING0001": {
+        "cookies": [
+          "key=val0;",
+          "key=val1; path=/cookie-parser-result",
+          "key=val2; path=/",
+          "key=val3; path=/bar",
+          "key=val4; domain=.example.org",
+          "key=val5; domain=.example.org; path=/cookie-parser-result/foo"
+        ],
+        "urlTested": "/cookie-parser-result/foo/baz?ordering0001",
+        "expected": "key=val5; key=val1; key=val2; key=val4",
+        "actual": "key=val1; key=val2; key=val5; key=val4"
+      },
+      "PATH0027": {
+        "cookies": [
+          "foo=bar; path=\"/cookie-parser-result/foo/qux;\""
+        ],
+        "urlTested": "/cookie-parser-result/foo/qux?path0027",
+        "expected": "foo=bar",
+        "actual": ""
+      },
+      "PATH0029": {
+        "cookies": [
+          "a=b; \tpath\t=\t/cookie-parser-result\t",
+          "x=y; \tpath\t=\t/book\t"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "a=b",
+        "actual": "a=b; x=y"
+      },
+      "PATH0030": {
+        "cookies": [
+          "foo=bar; path=/dog; path="
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "foo=bar",
+        "actual": ""
+      },
+      "PATH0031": {
+        "cookies": [
+          "foo=bar; path=; path=/dog"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "foo=bar"
+      },
+      "VALUE0004": {
+        "cookies": [
+          "foo=\"bar;baz\""
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "foo=\"bar",
+        "actual": "foo=\"bar;baz\""
+      },
+      "VALUE0006": {
+        "cookies": [
+          "\tfoo\t=\tbar\t \t;\tttt"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "foo=bar",
+        "actual": ""
+      }
+    }
   }
 }

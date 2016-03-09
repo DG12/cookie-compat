@@ -5,14 +5,14 @@ function createHeaderCell ($headerRow, content) {
         .addClass('text-center');
 }
 
-function createHeader ($table, results) {
+function createHeader ($table, browsers) {
     var $head      = $('<thead>').prependTo($table);
     var $headerRow = $('<tr>').appendTo($head);
 
     createHeaderCell($headerRow, 'IETF test');
     createHeaderCell($headerRow, 'Expected');
 
-    Object.keys(results).forEach(function (browser) {
+    browsers.forEach(function (browser) {
         createHeaderCell($headerRow, browser);
     });
 }
@@ -29,13 +29,7 @@ function sortByDesc (arr, fn) {
     });
 }
 
-function shapeRowData (results) {
-    var browsers = Object.keys(results);
-
-    browsers = sortByDesc(browsers, function (browser) {
-        return Object.keys(results[browser].failingTests).length;
-    });
-
+function shapeRowData (results, browsers) {
     var dataPerTest = browsers.reduce(function (data, browser, browserIdx) {
         var failingTests = results[browser].failingTests;
 
@@ -78,11 +72,18 @@ function createCell ($row, content) {
 }
 
 function createDataRow ($tbody, row) {
-    var $row = $('<tr>').appendTo($tbody);
+    var $row    = $('<tr>').appendTo($tbody);
+    var $anchor = $('<a>')
+        .attr('id', row.name)
+        .attr('href', '#' + row.name)
+        .addClass('test-anchor')
+        .append('#');
 
-    var $testCell = createCell($row, $('<u>').append(row.name))
+    var $testCell = createCell($row, '')
+        .append($('<u>').append(row.name))
+        .append($anchor)
         .append('<br>')
-        .append($('<strong>').append('Set cookie:'));
+        .append($('<i>').append('Set cookie:'));
 
     row.cookies.forEach(function (c) {
         $testCell
@@ -93,10 +94,10 @@ function createDataRow ($tbody, row) {
     if (row.urlTested !== 'http://home.example.org:8888/cookie-parser-result') {
         $testCell
             .append('<br>')
-            .append($('<strong>').append('Results URL:'))
+            .append($('<i>').append('Results URL:'))
             .append('<br>');
 
-        $testCell.append($('<a>').attr('href', '#').append(row.urlTested));
+        $testCell.append($('<a>').attr('href', 'javascript:void 0').append(row.urlTested));
     }
 
     createCell($row, $('<code>').append('"' + row.expected + '"'))
@@ -116,12 +117,17 @@ function createDataRow ($tbody, row) {
 
 $.get('data/results.json', function (results) {
     $(document).ready(function () {
-        var $table = $('#data');
-        var $tbody = $('<tbody>').appendTo($table);
+        var $table   = $('#data');
+        var $tbody   = $('<tbody>').appendTo($table);
+        var browsers = Object.keys(results);
 
-        createHeader($table, results);
+        browsers = sortByDesc(browsers, function (browser) {
+            return Object.keys(results[browser].failingTests).length;
+        });
 
-        shapeRowData(results).forEach(function (row) {
+        createHeader($table, browsers);
+
+        shapeRowData(results, browsers).forEach(function (row) {
             createDataRow($tbody, row);
         });
 

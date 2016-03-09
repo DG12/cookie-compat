@@ -19,11 +19,12 @@
     color: red;
 }
 
-.browser-version {
+.info-text,
+.info-text {
     color: gray;
 }
 
-.browser-version::before {
+.info-text::before {
     content: ' ';
 }
 

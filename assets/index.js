@@ -3,33 +3,33 @@
     // ---------------------------------------------
     var GROUPS = {
         'de-facto':              {
-            text: 'De facto standard',
-            cls:  'label label-success',
+            text:    'De facto standard',
+            cls:     'label label-success',
             sortIdx: 5
         },
         'all-no-consensus':      {
-            text: 'All / no consensus',
-            cls:  'label label-primary',
+            text:    'All / no consensus',
+            cls:     'label label-primary',
             sortIdx: 4
         },
         'majority':              {
-            text: 'Majority',
-            cls:  'label label-info',
+            text:    'Majority',
+            cls:     'label label-info',
             sortIdx: 3
         },
         'majority-no-consensus': {
-            text: 'Majority / no consensus',
-            cls:  'label label-default',
+            text:    'Majority / no consensus',
+            cls:     'label label-default',
             sortIdx: 2
         },
         'minority':              {
-            text: 'Minority - possible bug',
-            cls:  'label label-warning',
+            text:    'Minority - possible bug',
+            cls:     'label label-warning',
             sortIdx: 1
         },
         'bug':                   {
-            text: 'Bug',
-            cls:  'label label-danger',
+            text:    'Bug',
+            cls:     'label label-danger',
             sortIdx: 0
         }
     };
@@ -55,7 +55,7 @@
         });
     }
 
-    function escapeCookieStr(c) {
+    function escapeCookieStr (c) {
         return JSON.stringify(c);
     }
 
@@ -143,20 +143,29 @@
             .addClass('text-center');
     }
 
-    function createHeader ($table, results, browsers, testsTotal) {
+    function createHeader ($table, results, browsers, rowData) {
         var $head      = $('<thead>').prependTo($table);
         var $headerRow = $('<tr>').appendTo($head);
 
-        createHeaderCell($headerRow, 'IETF test');
+        createHeaderCell($headerRow, 'IETF test')
+            .append($('<span>').append('(' + rowData.length + ')').addClass('info-text'));
+
         createHeaderCell($headerRow, 'Expected');
 
-        browsers.forEach(function (browser) {
+        browsers.forEach(function (browser, browserIdx) {
             var browserData = results[browser];
-            var failed      = Object.keys(browserData.failingTests).length;
-            var succeeded   = testsTotal - failed;
+
+            var failed = rowData.reduce(function (counter, row) {
+                if (row.actualPerBrowser[browserIdx] !== void 0)
+                    counter++;
+
+                return counter;
+            }, 0);
+
+            var succeeded = rowData.length - failed;
 
             var $cell = createHeaderCell($headerRow, browser)
-                .append($('<span>').append('(v' + browserData.version + ')').addClass('browser-version'))
+                .append($('<span>').append('(v' + browserData.version + ')').addClass('info-text'))
                 .append('<br>');
 
             addFailedSucceeded($cell, failed, succeeded);
@@ -229,10 +238,42 @@
         });
     }
 
+    function filterData (rowData) {
+        var groups = Object.keys(GROUPS);
+
+        return rowData.filter(function (row) {
+            for (var i = 0; i < groups.length; i++) {
+                if (row.group === groups[i] && $('#' + groups[i]).is(':checked'))
+                    return true;
+            }
+
+            return false;
+        });
+    }
+
+    function renderData (results, browsers, rowData) {
+        $('#data').remove();
+
+        rowData = filterData(rowData);
+
+        var $table = $('<table>')
+            .attr('id', 'data')
+            .addClass('table table-bordered table-hover')
+            .appendTo('body');
+
+        var $tbody = $('<tbody>').appendTo($table);
+
+        createHeader($table, results, browsers, rowData);
+
+        rowData.forEach(function (row) {
+            createDataRow($tbody, row);
+        });
+
+        $table.stickyTableHeaders();
+    }
+
     $.get('data/results.json', function (results) {
         $(document).ready(function () {
-            var $table   = $('#data');
-            var $tbody   = $('<tbody>').appendTo($table);
             var browsers = Object.keys(results);
 
             browsers = sortByDesc(browsers, function (browser) {
@@ -241,13 +282,18 @@
 
             var rowData = shapeRowData(results, browsers);
 
-            createHeader($table, results, browsers, rowData.length);
+            renderData(results, browsers, rowData);
 
-            rowData.forEach(function (row) {
-                createDataRow($tbody, row);
+            Object.keys(GROUPS).forEach(function (group) {
+                $('#' + group)
+                    .change(function () {
+                        renderData(results, browsers, rowData);
+                    })
+                    .next('label')
+                    .attr('for', group)
+                    .append(GROUPS[group].text)
+                    .addClass(GROUPS[group].cls);
             });
-
-            $table.stickyTableHeaders();
         });
     });
 })();

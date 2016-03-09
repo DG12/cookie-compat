@@ -1,5 +1,12 @@
-.table tbody > tr > td,
-.table thead > tr > th {
-    vertical-align: top;
+.text-center {
+    vertical-align: middle !important;
     text-align: center;
+}
+
+thead {
+    background-color: white;
+}
+
+code {
+    color: gray;
 }

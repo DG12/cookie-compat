@@ -1,19 +1,15 @@
-function createHeaderCell ($headerRow, html) {
-    $headerRow.append('<th></th>');
-
-    $headerRow.find('th:last').append(html);
+function createHeaderCell ($headerRow, content) {
+    return $('<th>')
+        .append(content)
+        .appendTo($headerRow)
+        .addClass('text-center');
 }
 
 function createHeader ($table, results) {
-    $table.prepend('<thead></thead>');
+    var $head      = $('<thead>').prependTo($table);
+    var $headerRow = $('<tr>').appendTo($head);
 
-    var $head = $table.find('thead');
-
-    $head.append('<tr></tr>');
-
-    var $headerRow = $head.find('tr');
-
-    createHeaderCell($headerRow, 'IETF test case');
+    createHeaderCell($headerRow, 'IETF test');
     createHeaderCell($headerRow, 'Expected');
 
     Object.keys(results).forEach(function (browser) {
@@ -52,7 +48,7 @@ function shapeRowData (results) {
                     cookies:          test.cookies,
                     expected:         test.expected,
                     urlTested:        test.urlTested,
-                    actualPerBrowser: Array(browsers.length)
+                    actualPerBrowser: Array.apply(null, Array(browsers.length))
                 };
             }
 
@@ -75,23 +71,60 @@ function shapeRowData (results) {
     });
 }
 
-function createDataRow ($tbody, row) {
-    $tbody.append('<tr></tr>');
+function createCell ($row, content) {
+    return $('<td>')
+        .append(content)
+        .appendTo($row);
+}
 
-    var $tr = $tbody.find('tr:last');
-    // TODO
+function createDataRow ($tbody, row) {
+    var $row = $('<tr>').appendTo($tbody);
+
+    var $testCell = createCell($row, $('<u>').append(row.name))
+        .append('<br>')
+        .append($('<strong>').append('Set cookie:'));
+
+    row.cookies.forEach(function (c) {
+        $testCell
+            .append('<br>')
+            .append($('<code>').append('"' + c + '"'));
+    });
+
+    if (row.urlTested !== 'http://home.example.org:8888/cookie-parser-result') {
+        $testCell
+            .append('<br>')
+            .append($('<strong>').append('Results URL:'))
+            .append('<br>');
+
+        $testCell.append($('<a>').attr('href', '#').append(row.urlTested));
+    }
+
+    createCell($row, $('<code>').append('"' + row.expected + '"'))
+        .addClass('text-center');
+
+
+    row.actualPerBrowser.forEach(function (actual) {
+        var content = actual === void 0 ?
+                      $('<span>').addClass('glyphicon glyphicon-ok') :
+                      $('<code>').append('"' + actual + '"');
+
+        createCell($row, content)
+            .addClass(actual === void 0 ? 'success' : 'danger')
+            .addClass('text-center');
+    });
 }
 
 $.get('data/results.json', function (results) {
     $(document).ready(function () {
         var $table = $('#data');
-
-        $table.append('<tbody></tbody>');
-
-        var $tbody = $table.find('tbody');
+        var $tbody = $('<tbody>').appendTo($table);
 
         createHeader($table, results);
 
-        var rowData = shapeRowData(results);
+        shapeRowData(results).forEach(function (row) {
+            createDataRow($tbody, row);
+        });
+
+        $table.stickyTableHeaders();
     });
 });

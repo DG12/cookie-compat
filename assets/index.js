@@ -4,27 +4,33 @@
     var GROUPS = {
         'de-facto':              {
             text: 'De facto standard',
-            cls:  'label label-primary'
+            cls:  'label label-primary',
+            sortIdx: 5
         },
         'all-no-consensus':      {
             text: 'All / no consensus',
-            cls:  'label label-info'
+            cls:  'label label-info',
+            sortIdx: 4
         },
         'majority':              {
             text: 'Majority',
-            cls:  'label label-success'
+            cls:  'label label-success',
+            sortIdx: 3
         },
         'majority-no-consensus': {
             text: 'Majority / no consensus',
-            cls:  'label label-warning'
+            cls:  'label label-warning',
+            sortIdx: 2
         },
         'minority':              {
             text: 'Minority',
-            cls:  'label label-default'
+            cls:  'label label-default',
+            sortIdx: 1
         },
         'bug':                   {
             text: 'Bug',
-            cls:  'label label-danger'
+            cls:  'label label-danger',
+            sortIdx: 0
         }
     };
 
@@ -80,11 +86,7 @@
         });
 
         return sortByDesc(rows, function (row) {
-            var fails = row.actualPerBrowser.filter(function (actual) {
-                return actual !== void 0;
-            });
-
-            return fails.length;
+            return GROUPS[row.group].sortIdx + '' + row.failed;
         });
     }
 
@@ -92,21 +94,22 @@
         var total = row.actualPerBrowser.length;
         var half  = Math.ceil(total / 2);
 
-        row.failed = row.actualPerBrowser.filter(function (a) {
+        var failedActuals = row.actualPerBrowser.filter(function (a) {
             return a !== void 0;
-        }).length;
+        });
 
+        row.failed    = failedActuals.length;
         row.succeeded = total - row.failed;
 
         if (row.failed === total) {
-            if (isArrUnique(row.actualPerBrowser))
+            if (isArrUnique(failedActuals))
                 row.group = 'de-facto';
             else
                 row.group = 'all-no-consensus';
         }
 
         else if (row.failed >= half) {
-            if (isArrUnique(row.actualPerBrowser))
+            if (isArrUnique(failedActuals))
                 row.group = 'majority';
             else
                 row.group = 'majority-no-consensus';
@@ -178,11 +181,12 @@
         $testCell
             .append('<br>')
             .append($('<span>').append(group.text).addClass(group.cls))
-            .append(' - ');
+            .append(' (');
 
         addFailedSucceeded($testCell, row.failed, row.succeeded);
 
         $testCell
+            .append(')')
             .append('<br><br>')
             .append($('<i>').append('Set cookie:'));
 

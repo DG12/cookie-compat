@@ -4,27 +4,27 @@
     var GROUPS = {
         'de-facto':              {
             text: 'De facto standard',
-            cls:  'label label-primary',
+            cls:  'label label-success',
             sortIdx: 5
         },
         'all-no-consensus':      {
             text: 'All / no consensus',
-            cls:  'label label-info',
+            cls:  'label label-primary',
             sortIdx: 4
         },
         'majority':              {
             text: 'Majority',
-            cls:  'label label-success',
+            cls:  'label label-info',
             sortIdx: 3
         },
         'majority-no-consensus': {
             text: 'Majority / no consensus',
-            cls:  'label label-warning',
+            cls:  'label label-default',
             sortIdx: 2
         },
         'minority':              {
-            text: 'Minority',
-            cls:  'label label-default',
+            text: 'Minority - possible bug',
+            cls:  'label label-warning',
             sortIdx: 1
         },
         'bug':                   {

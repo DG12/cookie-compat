@@ -7,6 +7,22 @@
     content: ' ';
 }
 
+.success-text {
+    color: green;
+}
+
+.fail-text {
+    color: red;
+}
+
+.browser-version {
+    color: gray;
+}
+
+.browser-version::before {
+    content: ' ';
+}
+
 thead {
     background-color: white;
 }

@@ -5,7 +5,15 @@ function createHeaderCell ($headerRow, content) {
         .addClass('text-center');
 }
 
-function createHeader ($table, browsers) {
+function addFailedSucceeded ($elem, failed, succeeded) {
+    $elem
+        .append('<br>')
+        .append($('<span>').append(failed).addClass('fail-text'))
+        .append(' / ')
+        .append($('<span>').append(succeeded).addClass('success-text'));
+}
+
+function createHeader ($table, results, browsers, testsTotal) {
     var $head      = $('<thead>').prependTo($table);
     var $headerRow = $('<tr>').appendTo($head);
 
@@ -13,7 +21,14 @@ function createHeader ($table, browsers) {
     createHeaderCell($headerRow, 'Expected');
 
     browsers.forEach(function (browser) {
-        createHeaderCell($headerRow, browser);
+        var browserData = results[browser];
+        var failed      = Object.keys(browserData.failingTests).length;
+        var succeeded   = testsTotal - failed;
+
+        var $cell = createHeaderCell($headerRow, browser)
+            .append($('<span>').append('(v' + browserData.version + ')').addClass('browser-version'));
+
+        addFailedSucceeded($cell, failed, succeeded);
     });
 }
 
@@ -81,8 +96,18 @@ function createDataRow ($tbody, row) {
 
     var $testCell = createCell($row, '')
         .append($('<u>').append(row.name))
-        .append($anchor)
-        .append('<br>')
+        .append($anchor);
+
+    var failed = row.actualPerBrowser.filter(function (a) {
+        return a !== void 0;
+    }).length;
+
+    var succeeded = row.actualPerBrowser.length - failed;
+
+    addFailedSucceeded($testCell, failed, succeeded);
+
+    $testCell
+        .append('<br><br>')
         .append($('<i>').append('Set cookie:'));
 
     row.cookies.forEach(function (c) {
@@ -93,7 +118,7 @@ function createDataRow ($tbody, row) {
 
     if (row.urlTested !== 'http://home.example.org:8888/cookie-parser-result') {
         $testCell
-            .append('<br>')
+            .append('<br><br>')
             .append($('<i>').append('Results URL:'))
             .append('<br>');
 
@@ -125,9 +150,11 @@ $.get('data/results.json', function (results) {
             return Object.keys(results[browser].failingTests).length;
         });
 
-        createHeader($table, browsers);
+        var rowData = shapeRowData(results, browsers);
 
-        shapeRowData(results, browsers).forEach(function (row) {
+        createHeader($table, results, browsers, rowData.length);
+
+        rowData.forEach(function (row) {
             createDataRow($tbody, row);
         });
 

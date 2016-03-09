@@ -4,7 +4,7 @@
 }
 
 .description {
-    margin: 10px 10px 25px;
+    padding: 10px 10px 25px;
 }
 
 .test-anchor::before {
@@ -32,5 +32,5 @@ thead {
 }
 
 code {
-    color: gray;
+    color: black;
 }

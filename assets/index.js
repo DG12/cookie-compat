@@ -55,6 +55,10 @@
         });
     }
 
+    function escapeCookieStr(c) {
+        return JSON.stringify(c);
+    }
+
     function shapeRowData (results, browsers) {
         var dataPerTest = browsers.reduce(function (data, browser, browserIdx) {
             var failingTests = results[browser].failingTests;
@@ -65,8 +69,8 @@
                 if (!data[testName]) {
                     data[testName] = {
                         name:             testName,
-                        cookies:          test.cookies,
-                        expected:         test.expected,
+                        cookies:          test.cookies.map(escapeCookieStr),
+                        expected:         escapeCookieStr(test.expected),
                         urlTested:        test.urlTested,
                         actualPerBrowser: Array.apply(null, Array(browsers.length)),
                         group:            null,
@@ -75,7 +79,7 @@
                     };
                 }
 
-                data[testName].actualPerBrowser[browserIdx] = test.actual;
+                data[testName].actualPerBrowser[browserIdx] = escapeCookieStr(test.actual);
             });
 
             return data;
@@ -193,7 +197,7 @@
         row.cookies.forEach(function (c) {
             $testCell
                 .append('<br>')
-                .append($('<code>').append('"' + c + '"'));
+                .append($('<code>').append(c));
         });
 
         if (row.urlTested !== 'http://home.example.org:8888/cookie-parser-result') {
@@ -205,7 +209,7 @@
             $testCell.append($('<a>').attr('href', 'javascript:void 0').append(row.urlTested));
         }
 
-        createCell($row, $('<code>').append('"' + row.expected + '"'))
+        createCell($row, $('<code>').append(row.expected))
             .addClass('text-center');
     }
 
@@ -217,7 +221,7 @@
         row.actualPerBrowser.forEach(function (actual) {
             var content = actual === void 0 ?
                           $('<span>').addClass('glyphicon glyphicon-ok') :
-                          $('<code>').append('"' + actual + '"');
+                          $('<code>').append(actual);
 
             createCell($row, content)
                 .addClass(actual === void 0 ? 'success' : 'danger')

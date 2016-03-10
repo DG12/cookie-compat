@@ -184,9 +184,13 @@
         if(c.length < 70)
             return $('<code>').append(c);
 
-        return $('<span>')
-            .addClass('glyphicon glyphicon-eye-open')
-            .attr('title', c);
+        var $icon = $('<span>')
+            .addClass('glyphicon glyphicon-eye-open');
+
+        return $('<div>')
+            .attr('title', c)
+            .append($icon)
+            .append(' Cookie is too long. Hover to view.')
     }
 
     function createTestCell (row, $row) {

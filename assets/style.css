@@ -28,6 +28,11 @@
     content: ' ';
 }
 
+td {
+    max-width: 15%;
+}
+
+
 thead {
     background-color: white;
 }

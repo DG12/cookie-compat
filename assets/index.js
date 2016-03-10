@@ -55,8 +55,10 @@
         });
     }
 
-    function escapeCookieStr (c) {
-        return JSON.stringify(c);
+    function prepareCookieStr (c) {
+        var str = JSON.stringify(c);
+
+        return str;
     }
 
     function shapeRowData (results, browsers) {
@@ -69,8 +71,8 @@
                 if (!data[testName]) {
                     data[testName] = {
                         name:             testName,
-                        cookies:          test.cookies.map(escapeCookieStr),
-                        expected:         escapeCookieStr(test.expected),
+                        cookies:          test.cookies.map(prepareCookieStr),
+                        expected:         prepareCookieStr(test.expected),
                         urlTested:        test.urlTested,
                         actualPerBrowser: Array.apply(null, Array(browsers.length)),
                         group:            null,
@@ -79,7 +81,7 @@
                     };
                 }
 
-                data[testName].actualPerBrowser[browserIdx] = escapeCookieStr(test.actual);
+                data[testName].actualPerBrowser[browserIdx] = prepareCookieStr(test.actual);
             });
 
             return data;
@@ -178,6 +180,15 @@
             .appendTo($row);
     }
 
+    function renderCookie(c) {
+        if(c.length < 70)
+            return $('<code>').append(c);
+
+        return $('<span>')
+            .addClass('glyphicon glyphicon-eye-open')
+            .attr('title', c);
+    }
+
     function createTestCell (row, $row) {
         var $anchor = $('<a>')
             .attr('id', row.name)
@@ -206,7 +217,7 @@
         row.cookies.forEach(function (c) {
             $testCell
                 .append('<br>')
-                .append($('<code>').append(c));
+                .append(renderCookie(c));
         });
 
         if (row.urlTested !== 'http://home.example.org:8888/cookie-parser-result') {
@@ -218,7 +229,7 @@
             $testCell.append($('<a>').attr('href', 'javascript:void 0').append(row.urlTested));
         }
 
-        createCell($row, $('<code>').append(row.expected))
+        createCell($row, renderCookie(row.expected))
             .addClass('text-center');
     }
 
@@ -230,7 +241,7 @@
         row.actualPerBrowser.forEach(function (actual) {
             var content = actual === void 0 ?
                           $('<span>').addClass('glyphicon glyphicon-ok') :
-                          $('<code>').append(actual);
+                          renderCookie(actual);
 
             createCell($row, content)
                 .addClass(actual === void 0 ? 'success' : 'danger')

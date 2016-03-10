@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="description">
-    <h1>Cookies specification compatibility issues in modern browsers</h1>
+    <h1>Cookies specification compliance issues in modern browsers</h1>
 
     <p>
         <a class="github-button"
@@ -26,25 +26,44 @@
     </p>
 
     <p>
-        research by Ivan Nikulin (<b>Email: </b>ifaaan@gmail.com<b> GitHub: </b><a
-            href="https://github.com/inikulin">inikulin</a>
-        <b>Twitter: </b><a href="https://twitter.com/_inikulin_">_inikulin_</a>)
+        research by Ivan Nikulin
+        <br>
+        (<b>email: </b>ifaaan@gmail.com,<b> github: </b><a
+            href="https://github.com/inikulin">inikulin</a>,
+        <b>twitter: </b><a href="https://twitter.com/_inikulin_">_inikulin_</a>)
+    </p>
+
+    <p class="lead">
+        This table lists <a href="https://tools.ietf.org/html/rfc6265">RFC 6265</a> compliance issues found in modern
+        browsers. Data was obtained by running the <a href="https://github.com/abarth/http-state/tree/master/tests">IETF
+        test suite</a> across major browsers using a <a href="https://github.com/inikulin/cookie-compat">specially made
+        test runner</a>. Test fails are divided into categories for the working group to distinguish implementation bugs
+        from de facto standards that should make their way to the specification.
     </p>
 
     <h3>Issue groups:</h3>
-    <input id="de-facto" type="checkbox" checked> <label></label> - Test fails in all browsers with identical results.
-    Consider as specification update.
+    <input id="de-facto" type="checkbox" checked> <label></label> - Test fails in all browsers with the identical
+    results.
     <br>
     <input id="all-no-consensus" type="checkbox" checked> <label></label> - Test fails in all browsers, but with
-    different results. Seek consensus and consider as specification update.
+    different results. Possible de facto standard.
     <br>
-    <input id="majority" type="checkbox" checked> <label></label> - TODO
+    <input id="majority" type="checkbox" checked> <label></label> - Test fails in the majority of browsers with the
+    identical results. Possible de facto standard.
     <br>
-    <input id="majority-no-consensus" type="checkbox" checked> <label></label> - TODO
+    <input id="majority-no-consensus" type="checkbox" checked> <label></label> - Test fails in the majority of browsers,
+    but with different results.
     <br>
-    <input id="minority" type="checkbox" checked> <label></label> - TODO
+    <input id="minority" type="checkbox" checked> <label></label> - Test fails in the minority of browsers. More likely
+    it's an implementation bug than planned behavior.
     <br>
-    <input id="bug" type="checkbox" checked> <label></label> - TODO
+    <input id="bug" type="checkbox" checked> <label></label> - Test fails only in one browser. Implementation bug.
+    <br>
+    <br>
+    <b>Note:</b> all cookies are set on page <a href="#">http://home.example.org:8888/test</a> and results are inspected
+    on <a href="#">http://home.example.org:8888/cookie-parser-result</a>, except for those tests where the results URL
+    is explicitly specified.
+
 
 </div>
 <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>

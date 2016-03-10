@@ -1112,5 +1112,332 @@
         "actual": ""
       }
     }
+  },
+  "Edge": {
+    "version": "12.10240.0",
+    "failingTests": {
+      "0004": {
+        "cookies": [
+          "foo"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "foo"
+      },
+      "0006": {
+        "cookies": [
+          "foo=bar; max-age=0;"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "foo=bar"
+      },
+      "0021": {
+        "cookies": [
+          "a=b",
+          "=x",
+          "c=d"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "a=b; c=d",
+        "actual": "a=b; x; c=d"
+      },
+      "0027": {
+        "cookies": [
+          "foo",
+          "bar"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "bar"
+      },
+      "CHARSET0001": {
+        "cookies": [
+          "foo=春节回家路·春运完全手册"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "foo=春节回家路·春运完全手册",
+        "actual": "foo=?????�??????"
+      },
+      "CHARSET0002": {
+        "cookies": [
+          "春节回=家路·春运完全手册"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "春节回=家路·春运完全手册",
+        "actual": "???=??�??????"
+      },
+      "CHARSET0003": {
+        "cookies": [
+          "春节回=家路·春运; 完全手册"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "春节回=家路·春运",
+        "actual": "???=??�??"
+      },
+      "CHARSET0004": {
+        "cookies": [
+          "foo=\"春节回家路·春运完全手册\""
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "foo=\"春节回家路·春运完全手册\"",
+        "actual": "foo=\"?????�??????\""
+      },
+      "CHROMIUM0009": {
+        "cookies": [
+          "BLAHHH; path=/;"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "BLAHHH"
+      },
+      "CHROMIUM0010": {
+        "cookies": [
+          "\"BLA\\\"HHH\"; path=/;"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "\"BLA\\\"HHH\""
+      },
+      "CHROMIUM0012": {
+        "cookies": [
+          "=ABC"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "ABC"
+      },
+      "DISABLED_CHROMIUM0020": {
+        "cookies": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "DISABLED_CHROMIUM0023": {
+        "cookies": [
+          "AAA=BB\rZYX"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "AAA=BB",
+        "actual": "AAA=BB_ZYX"
+      },
+      "DOMAIN0023": {
+        "cookies": [
+          "foo2=bar2; domain=.example.org",
+          "foo=bar; domain=home.example.org"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result?domain0023",
+        "expected": "foo2=bar2; foo=bar",
+        "actual": "foo=bar; foo2=bar2"
+      },
+      "DOMAIN0029": {
+        "cookies": [
+          "foo=bar"
+        ],
+        "urlTested": "http://subdomain.home.example.org:8888/cookie-parser-result?domain0029",
+        "expected": "",
+        "actual": "foo=bar"
+      },
+      "MOZILLA0001": {
+        "cookies": [
+          "foo=bar; max-age=-1"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "foo=bar"
+      },
+      "MOZILLA0002": {
+        "cookies": [
+          "foo=bar; max-age=0"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "foo=bar"
+      },
+      "MOZILLA0005": {
+        "cookies": [
+          "foo=bar; max-age=-20"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "foo=bar"
+      },
+      "MOZILLA0009": {
+        "cookies": [
+          "foo=bar; max-age=60",
+          "foo1=bar; max-age=60",
+          "foo=differentvalue; max-age=0"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "foo1=bar",
+        "actual": "foo=differentvalue; foo1=bar"
+      },
+      "MOZILLA0010": {
+        "cookies": [
+          "foo=bar; max-age=60",
+          "foo1=bar; max-age=60",
+          "foo=differentvalue; max-age=0",
+          "foo2=evendifferentvalue; max-age=0"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "foo1=bar",
+        "actual": "foo=differentvalue; foo1=bar; foo2=evendifferentvalue"
+      },
+      "MOZILLA0012": {
+        "cookies": [
+          "test=\"fubar! = foo;bar\\\";\" parser; max-age=6",
+          "five; max-age=2.63,"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "test=\"fubar! = foo",
+        "actual": "test=\"fubar! = foo; five"
+      },
+      "MOZILLA0013": {
+        "cookies": [
+          "test=kill; max-age=0",
+          "five; max-age=0"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "test=kill; five"
+      },
+      "MOZILLA0014": {
+        "cookies": [
+          "six"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "six"
+      },
+      "MOZILLA0015": {
+        "cookies": [
+          "six",
+          "seven"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "seven"
+      },
+      "MOZILLA0016": {
+        "cookies": [
+          "six",
+          "seven",
+          " =eight"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "eight"
+      },
+      "MOZILLA0017": {
+        "cookies": [
+          "six",
+          "seven",
+          " =eight",
+          "test=six"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "test=six",
+        "actual": "eight; test=six"
+      },
+      "NAME0017": {
+        "cookies": [
+          "=a=bar"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "a=bar"
+      },
+      "NAME0023": {
+        "cookies": [
+          "foo;bar=baz"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "foo"
+      },
+      "NAME0025": {
+        "cookies": [
+          "===a=bar"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "==a=bar"
+      },
+      "NAME0028": {
+        "cookies": [
+          "=a"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "a"
+      },
+      "NAME0031": {
+        "cookies": [
+          "\"foo;bar\"=baz"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "\"foo"
+      },
+      "NAME0032": {
+        "cookies": [
+          "\"foo\\\"bar;baz\"=qux"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "\"foo\\\"bar"
+      },
+      "NAME0033": {
+        "cookies": [
+          "=foo=bar",
+          "aaa"
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result",
+        "expected": "",
+        "actual": "aaa"
+      },
+      "OPTIONAL_DOMAIN0030": {
+        "cookies": [
+          "foo=bar; domain="
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result?optional-domain0030",
+        "expected": "foo=bar",
+        "actual": ""
+      },
+      "OPTIONAL_DOMAIN0041": {
+        "cookies": [
+          "foo=bar; domain=example.org; domain="
+        ],
+        "urlTested": "http://home.example.org:8888/cookie-parser-result?optional-domain0041",
+        "expected": "foo=bar",
+        "actual": ""
+      },
+      "PATH0024": {
+        "cookies": [
+          "foo=bar; path=/cookie-parser-result/foo/qux?"
+        ],
+        "urlTested": "/cookie-parser-result/foo/qux?path0024",
+        "expected": "",
+        "actual": "foo=bar"
+      },
+      "PATH0025": {
+        "cookies": [
+          "foo=bar; path=/cookie-parser-result/foo/qux#"
+        ],
+        "urlTested": "/cookie-parser-result/foo/qux?path0025",
+        "expected": "",
+        "actual": "foo=bar"
+      },
+      "PATH0027": {
+        "cookies": [
+          "foo=bar; path=\"/cookie-parser-result/foo/qux;\""
+        ],
+        "urlTested": "/cookie-parser-result/foo/qux?path0027",
+        "expected": "foo=bar",
+        "actual": ""
+      }
+    }
   }
 }

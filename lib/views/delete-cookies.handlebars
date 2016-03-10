@@ -17,9 +17,7 @@
             '/cookie-parser-result/f%6Fo/bar',
             '/cookie-parser-result/',
             '/cookie-parser-result',
-            '/',
-            '',
-            '/='
+            ''
         ];
 
         var DOMAINS = [
@@ -49,7 +47,7 @@
                         if (domain)
                             expire += '; Domain=' + domain;
 
-                        if (path)
+                        if (path !== null)
                             expire += '; Path=' + path;
 
                         document.cookie = expire;

@@ -16,12 +16,18 @@
     var iframes = document.querySelectorAll('iframe');
     var pendingIFramesCount = iframes.length;
 
-    window.addEventListener('message', function () {
-        if (--pendingIFramesCount === 0)
-            runTest();
+    Array.prototype.slice.call(iframes).forEach(function (iframe) {
+        iframe.onload = function () {
+            if (--pendingIFramesCount === 0)
+                runTest();
+        };
     });
 
     function runTest () {
+        // NOTE: assert cookies are clean
+        if (document.cookie !== '')
+            throw new Error('Cookie are not clean: ' + document.cookie);
+
         var cookies = JSON.parse(document.querySelector('#cookies').textContent);
 
         cookies.forEach(function (c) {

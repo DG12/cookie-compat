@@ -16,7 +16,10 @@
             '/cookie-parser-result/foo/qux;',
             '/cookie-parser-result/f%6Fo/bar',
             '/cookie-parser-result/',
-            '/cookie-parser-result'
+            '/cookie-parser-result',
+            '/',
+            '',
+            '/='
         ];
 
         var DOMAINS = [
@@ -54,6 +57,8 @@
                 });
             });
         });
+
+        window.top.postMessage('ready', 'http://home.example.org:8888');
     </script>
 </head>
 <body>
